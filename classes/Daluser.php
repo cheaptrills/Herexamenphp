@@ -44,7 +44,6 @@ class Daluser {
         $user->setUsername($username);
         $user->setPassword($password);
         $user->setPasswordConfirmation($passwordConfirm);
-        var_dump($user);
 
         Daluser::createUserWithUser($user);
     }

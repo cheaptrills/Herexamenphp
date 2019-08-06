@@ -1,5 +1,8 @@
 <?php 
     require_once("autoload/autoload.php");
+    if(isset($_SESSION["usename"])){
+        header("location:index.php");
+    }
 
     if( !empty($_POST) ){
 

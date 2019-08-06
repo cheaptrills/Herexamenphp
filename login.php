@@ -1,6 +1,9 @@
 <?php
 require_once("autoload/autoload.php");
-var_dump($_SESSION);
+if(isset($_SESSION["usename"])){
+    header("location:index.php");
+}
+
 if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['password'];
