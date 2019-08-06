@@ -1,13 +1,11 @@
 <?php
 require_once("autoload/autoload.php");
-
+var_dump($_SESSION);
 if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if(User::canLogin($username, $password)){
-        User::doLogin($username);
-    } else {
+    if(!Daluser::login($username, $password)){ 
         $error = true;
     }
 }

@@ -100,7 +100,5 @@ class User
             return false;
         }
     }
-
-    
     
 }

@@ -41,8 +41,6 @@ class Daluser {
             throw new Exception("This username is already registered.");
         }
 
-        
-
         $user->setUsername($username);
         $user->setPassword($password);
         $user->setPasswordConfirmation($passwordConfirm);
@@ -56,8 +54,32 @@ class Daluser {
         $conn = Db::getConnection();
         $statement = $conn->prepare("INSERT INTO user(username,password) values (:username, :password )");
         $statement->bindValue(":username", $user->getUsername());
-        $statement->bindValue(":password", $user->getPassword());
+        $statement->bindValue(":password", Security::hash($user->getPassword()));
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function login($username, $password){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from user where username = :username");
+        $statement->bindParam(":username", $username); # the username parameter is bound to :username to prevent sql-injection
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+        if (password_verify($password, $user['password'])) {
+            echo("true");
+            $_SESSION['username'] = $username;
+            header("location: index.php");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // check if the user is logged in
+    public static function userLoggedIn() {
+        if( isset($_SESSION['username']) ){ /* User is logged in, no redirect needed! */ }
+        else{ /* User is not logged in, redirect to login.php! */ header("location: login.php"); }
     }
 }
