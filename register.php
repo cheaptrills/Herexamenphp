@@ -1,5 +1,5 @@
-<?php
-    require_once("bootstrap/bootstrap.php");
+<?php 
+    require_once("autoload/autoload.php");
 
     if( !empty($_POST) ){
 
@@ -9,15 +9,7 @@
 
             //Try to start new user obj, set properties and call the register function
             try{
-                $user = new User();
-
-                $user->setUsername($username);
-                $user->setPassword($password);
-                $user->setPasswordConfirmation($passwordConfirm);
-
-                if( $user->register() ){
-                    $user->firstLogin();
-                }
+                Daluser::createUser($username,$password,$passwordConfirm);
 
             }catch( Exception $e){
                 $error = $e->getMessage();

@@ -1,5 +1,5 @@
 <?php
-require_once("bootstrap/bootstrap.php");
+require_once("autoload/autoload.php");
 
 if (!empty($_POST)) {
     $username = $_POST['username'];

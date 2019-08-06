@@ -10,7 +10,7 @@
                 return self::$conn;
             }else{
                 //no connection found, establisch a new one with config.ini file
-                $config = parse_ini_file($_SERVER['DOCUMENT_ROOT']. "/config/config.ini");
+                $config = parse_ini_file($_SERVER['DOCUMENT_ROOT']. "/herexamenphp/config/config.ini");
                 self::$conn = new PDO("mysql:host=" . $config['host'] . ";dbname=" . $config['db_name'], $config['db_user'], $config['db_password']);
                 return self::$conn;
             }

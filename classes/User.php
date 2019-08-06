@@ -1,6 +1,4 @@
 <?php
-require_once("Db.php");
-require_once("Security.php");
 
 class User
 {
@@ -21,27 +19,10 @@ class User
      * @param $username
      */
     public function setUsername($username)
-    {
-        //Check if not empty
-        if( empty($username) ){
-            throw new Exception("Username cannot be empty.");
-        }
-
-        //Check if username is not longer than 30chars
-        if( User::maxLength($username, 30)){
-            throw new Exception("Username cannot be longer than 30 characters.");
-        }
-
-        //Check if username is not in our DB yet
-        if( !User::isUsernameAvailable($username) ){
-            throw new Exception("This username is already registered.");
-        }
-        
+    {       
         //username not too long, set username
         $this->username = $username;
         return $this;
-        
-        
     }
 
     /**
@@ -91,7 +72,7 @@ class User
         }
 
         //Do passwords equal?
-        if( $this->getPassword() !== $passwordConfirmation){
+        if( $this->getPassword() != $passwordConfirmation){
             //Passwords do not equal, throw exception
             throw new Exception("Password fields are not equal, please enter them again");
         }
@@ -100,4 +81,26 @@ class User
         return $this;
     }
 
+    public static function maxLength($string, $maxLength)
+    {
+        if (strlen($string) > $maxLength) {
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function minLength($string, $minLength)
+    {
+        if (strlen($string) < $minLength) {
+            //String is too short, return true for error handling
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     
+    
+}
