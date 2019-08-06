@@ -1,6 +1,6 @@
 <?php
 require_once("autoload/autoload.php");
-if(isset($_SESSION["usename"])){
+if(isset($_SESSION['username'])){
     header("location:index.php");
 }
 
