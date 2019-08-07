@@ -78,8 +78,14 @@ class Daluser {
 
     // check if the user is logged in
     public static function userLoggedIn() {
-        if( isset($_SESSION['username']) ){ /* User is logged in, no redirect needed! */ }
-        else{ /* User is not logged in, redirect to login.php! */ header("location: login.php"); }
+        if( isset($_SESSION['username']) )
+        { 
+            /* User is logged in, no redirect needed! */ 
+        }
+        else
+        { /* User is not logged in, redirect to login.php! */ 
+            header("location: login.php"); 
+        }
     }
 }
  
