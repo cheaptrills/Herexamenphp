@@ -82,3 +82,4 @@ class Daluser {
         else{ /* User is not logged in, redirect to login.php! */ header("location: login.php"); }
     }
 }
+ 
