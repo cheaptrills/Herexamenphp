@@ -5,7 +5,19 @@ User::userLoggedIn();
 
 if (isset($_POST['upload'])){
 
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $date = $_POST['date'];
+    $workload = $_POST['workload'];
 
+    try{
+        $lastId = Daltask::saveTask($title,$description,$date,$workload);
+    
+        die($lastId);
+
+    }catch( Exception $e){
+        $error = $e->getMessage();
+    }
 
 }
 
@@ -48,28 +60,22 @@ if (isset($_POST['upload'])){
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="10"></textarea>
         </div>
-
         <div class="formField">
             <label for="date">Date</label>
             <input type="date" id="date" name="date" >
         </div>
-
         <div class="formField">
             <label for="workload">workload</label> 
             <div class="workload">
                 <input type="range" min="1" max="20" id="workload" name="workload">
             </div>
-
         </div>
-
         <div class="formField">
             <label for="file">add files</label> 
             <div class="file">
                 <input type="file" id="file" name="file[]">
             </div>
-
         </div>
-
         <div class="formField">
             <button type="submit" name="upload" class="btn btnPrimary btnPost">addtask<i class="hidden" id="loaderIcon"></i></button>
         </div>
