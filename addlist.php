@@ -1,11 +1,17 @@
 <?php
 require_once("autoload/autoload.php");
-
 User::userLoggedIn();
 
 if (isset($_POST['upload'])){
 
+    $title = $_POST['title'];
 
+    try{
+        Dallist::saveList($title);
+
+    }catch( Exception $e){
+        $error = $e->getMessage();
+    }
 
 }
 
@@ -24,11 +30,10 @@ if (isset($_POST['upload'])){
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/cssgram.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>IMSTAGRAM - add post</title>
+    <title>add list</title>
 </head>
 
 <body class="post">
-<?php include_once("nav.incl.php"); ?>
 <form action="" method="POST" enctype="multipart/form-data">
     <?php if (isset($error)): ?>
         <div class="formError">
@@ -38,45 +43,14 @@ if (isset($_POST['upload'])){
         </div>
     <?php endif; ?>
     <div class="flexbox postPage">
-        <h2 formTitle>Add post</h2>
-
-
-        <div class="formField">
-            <label for="image">Upload a picture</label>
-            <div class="uploadFileWrapper">
-                <input type="file" id="image" name="image">
-            </div>
-
-        </div>
-
-        <div class="imageWrapper">
-            <figure>
-                <img id="output" class="uploadedImage" visibility="hidden"/>
-            </figure>
-        </div>
+        <h2 formTitle>Add list</h2>
 
         <div class="formField">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="10"></textarea>
+            <label for="title">title</label>
+            <textarea id="title" name="title" rows="10"></textarea>
         </div>
         <div class="formField">
-        <label for="category">category</label>
-        <select name="category" id="category">
-            <option value="0">none</option>
-            <option value="1">Lineart</option>
-            <option value="2">Emblems</option>
-            <option value="3">Logotypes</option>
-            <option value="4">Monogram Logo's</option>
-            <option value="5">Brand Marks</option>
-            <option value="6">Abstract Logo Marks</option>
-            <option value="7">Mascots</option>
-            <option value="8">Combination marks</option>
-        </select>
-        </div>
-
-
-        <div class="formField">
-            <button type="submit" name="upload" class="btn btnPrimary btnPost">Post<i class="hidden" id="loaderIcon"></i></button>
+            <button type="submit" name="upload" class="btn btnPrimary btnPost">add list<i class="hidden" id="loaderIcon"></i></button>
         </div>
     </div>
 </form>

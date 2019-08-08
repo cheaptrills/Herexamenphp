@@ -2,10 +2,28 @@
 
 class User
 {
+    private $id;
     private $username;
     private $password;
     private $passwordConfirmation;
 
+     /**
+     * @return id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     */
+    public function setId($id)
+    {       
+        
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return username
@@ -98,6 +116,18 @@ class User
             return true;
         } else {
             return false;
+        }
+    }
+
+    // check if the user is logged in
+    public static function userLoggedIn() {
+        if( isset($_SESSION['username']) )
+        { 
+            /* User is logged in, no redirect needed! */ 
+        }
+        else
+        { /* User is not logged in, redirect to login.php! */ 
+            header("location: login.php"); 
         }
     }
     
