@@ -28,7 +28,6 @@ if (isset($_POST['upload'])){
 </head>
 
 <body class="post">
-<?php include_once("nav.incl.php"); ?>
 <form action="" method="POST" enctype="multipart/form-data">
     <?php if (isset($error)): ?>
         <div class="formError">
@@ -38,45 +37,41 @@ if (isset($_POST['upload'])){
         </div>
     <?php endif; ?>
     <div class="flexbox postPage">
-        <h2 formTitle>Add post</h2>
-
+        <h2 formTitle>Add task</h2>
 
         <div class="formField">
-            <label for="image">Upload a picture</label>
-            <div class="uploadFileWrapper">
-                <input type="file" id="image" name="image">
-            </div>
-
-        </div>
-
-        <div class="imageWrapper">
-            <figure>
-                <img id="output" class="uploadedImage" visibility="hidden"/>
-            </figure>
+            <label for="title">Title</label>
+            <textarea id="title" name="title" rows="1"></textarea>
         </div>
 
         <div class="formField">
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="10"></textarea>
         </div>
+
         <div class="formField">
-        <label for="category">category</label>
-        <select name="category" id="category">
-            <option value="0">none</option>
-            <option value="1">Lineart</option>
-            <option value="2">Emblems</option>
-            <option value="3">Logotypes</option>
-            <option value="4">Monogram Logo's</option>
-            <option value="5">Brand Marks</option>
-            <option value="6">Abstract Logo Marks</option>
-            <option value="7">Mascots</option>
-            <option value="8">Combination marks</option>
-        </select>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" >
         </div>
 
+        <div class="formField">
+            <label for="workload">workload</label> 
+            <div class="workload">
+                <input type="range" min="1" max="20" id="workload" name="workload">
+            </div>
+
+        </div>
 
         <div class="formField">
-            <button type="submit" name="upload" class="btn btnPrimary btnPost">Post<i class="hidden" id="loaderIcon"></i></button>
+            <label for="file">add files</label> 
+            <div class="file">
+                <input type="file" id="file" name="file[]">
+            </div>
+
+        </div>
+
+        <div class="formField">
+            <button type="submit" name="upload" class="btn btnPrimary btnPost">addtask<i class="hidden" id="loaderIcon"></i></button>
         </div>
     </div>
 </form>
