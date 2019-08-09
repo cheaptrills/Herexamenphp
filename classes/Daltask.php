@@ -58,7 +58,7 @@ class Daltask {
 
         foreach($result as $item){
             $task = new Task();
-            $task->setTitle($item["name"]);
+            $task->setTitle($item["title"]);
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);

@@ -46,5 +46,21 @@ class Dallist{
         }
         return $listitems;
     }
+
+    public static function getListById($id){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from list WHERE id = :id");
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $list = new Lists();
+        $list->setTitle($result["name"]);
+        $list->setId($result["id"]);
+        $list->setTodos(Daltask::getTasksByListId($result["id"]));
+        return $list;
+
+    }
 }
 // NONE SHALL PASS
