@@ -12,4 +12,15 @@ class Dallist{
         $statement->bindParam(":name", $title);
         $result = $statement->execute();
     }
+
+    public static function getList($title){
+
+
+
+    }
+
+    public static function getLists(){
+
+
+    }
 }
