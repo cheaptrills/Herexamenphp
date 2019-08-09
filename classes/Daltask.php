@@ -2,16 +2,17 @@
 
 class Daltask {
 
-    public static function saveTask($title,$date,$workload){
+    public static function saveTask($title,$date,$workload,$listid){
 
         $conn = Db::getConnection();
         $user_id = Daluser::getUserId();
         $conn->beginTransaction();
 
-        $statement = $conn->prepare("insert into todo (`title`,`date`,`work`) VALUES (:title,:date,:workload)");
+        $statement = $conn->prepare("insert into todo (`title`,`date`,`work`,`listid`) VALUES (:title,:date,:workload,:listid)");
         $statement->bindParam(":title", $title);
         $statement->bindParam(":date", $date);
         $statement->bindParam(":workload", $workload);
+        $statement->bindParam(":listid", $listid);
         $result = $statement->execute();
     
         $lstId = $conn->lastInsertId();

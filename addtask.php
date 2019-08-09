@@ -15,7 +15,7 @@ if (isset($_POST['upload'])){
     $date = $_POST['date'];
     $workload = $_POST['workload'];
     try{
-        $lastId = Daltask::saveTask($title,$date,$workload);
+        $lastId = Daltask::saveTask($title,$date,$workload,$listid);
 
         if(isset($_FILES["file"])){
             for($i = 0; $i < count($_FILES["file"]["name"]); $i++ ){
