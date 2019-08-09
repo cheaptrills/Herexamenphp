@@ -24,7 +24,7 @@ class Dallist{
         $list = new List();
         $list->setTitle($result["name"]);
         $list->setId($result["id"]);
-
+        $list->setTodos(Daltask::getTasksByListId($result["id"]));
         return $list;
 
     }
