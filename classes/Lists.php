@@ -1,10 +1,33 @@
 <?php
 
-class list {
+class Lists {
 
     private $title;
     private $id;
     private $todos;
+
+/**
+ * Getter for Todos
+ *
+ * @return [type]
+ */
+public function getTodos()
+{
+    return $this->todos;
+}
+
+/**
+ * Setter for Todos
+ * @var [type] todos
+ *
+ * @return self
+ */
+public function setTodos($todos)
+{
+    $this->todos = $todos;
+    return $this;
+}
+
 
 /**
  * Getter for Title

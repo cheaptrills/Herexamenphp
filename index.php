@@ -1,3 +1,7 @@
+<?php
+require_once("autoload/autoload.php");
+$lists = Dallist::getLists();
+?>
 <p>index omdat het moet van daphne en haar grote armen</p>
 
 <!DOCTYPE html>
@@ -10,5 +14,10 @@
 </head>
 <body>
     <a href="addlist.php">add list</a>
+    <?php
+    foreach($lists as $list){
+        echo("<p>{$list->getTitle()}</p>");
+    }
+    ?>
 </body>
 </html>

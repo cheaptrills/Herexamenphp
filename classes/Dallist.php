@@ -21,7 +21,8 @@ class Dallist{
         $statement->bindParam(":name", $title);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
-        $list = new List();
+
+        $list = new Lists();
         $list->setTitle($result["name"]);
         $list->setId($result["id"]);
         $list->setTodos(Daltask::getTasksByListId($result["id"]));
@@ -37,11 +38,11 @@ class Dallist{
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $listitems = [];
 
-        foreach($result as $item){
-            $list = new List();
-            $list->setTitle($item["name"]);
-            $list->setId($item["id"]);
-            array_push($listitems,$list);
+        foreach($result as $item) {
+            $_list = new Lists();
+            $_list->setTitle($item["name"]);
+            $_list->setId($item["id"]);
+            array_push($listitems,$_list);
         }
         return $listitems;
     }
