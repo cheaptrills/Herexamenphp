@@ -138,12 +138,11 @@ class Daluser {
     }
 
     public static function UpdateUser(User $u){
-        // UPDATE `user` SET `password`=:password,`isAdmin`=:isAdmin WHERE id = :id
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE `user` SET `password`=:password,`isAdmin`=:isAdmin WHERE id = :id");
-        $statement->bindParam(":id", $u->getId());
-        $statement->bindParam(":password", $u->getPassword());
-        $statement->bindParam(":isAdmin", $u->getIsAdmin());
+        $statement->bindValue(":id", $u->getId());
+        $statement->bindValue(":password", $u->getPassword());
+        $statement->bindValue(":isAdmin", $u->getIsAdmin());
         return $statement->execute();
     }
 

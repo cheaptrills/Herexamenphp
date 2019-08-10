@@ -40,7 +40,6 @@ class Daltask {
         $task->setId($result["id"]);
         $task->setDate($result["date"]);
         $task->setWork($result["work"]);
-        $task->setComment($result["comment"]);
         $task->setListid($result["listid"]);
         
 
@@ -62,7 +61,6 @@ class Daltask {
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
-            $task->setComment($item["comment"]);
             $task->setListid($item["listid"]);
             array_push($items,$task);
         }
@@ -83,10 +81,31 @@ class Daltask {
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
-            $task->setComment($item["comment"]);
             $task->setListid($item["listid"]);
             array_push($items,$task);
         }
         return $items;
+    }
+
+    public static function getTasksByUserId($userid){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from todo WHERE userid = :id");
+        $statement->bindParam(":id", $userid);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $items = [];
+
+        foreach($result as $item){
+            $task = new Task();
+            $task->setTitle($item["title"]);
+            $task->setId($item["id"]);
+            $task->setDate($item["date"]);
+            $task->setWork($item["work"]);
+            $task->setListid($item["listid"]);
+            array_push($items,$task);
+        }
+        return $items;
+
     }
 }
