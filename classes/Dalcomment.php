@@ -16,7 +16,7 @@ class Dalcomment {
 
         $conn = Db::getConnection();
         // insert all post-information to database
-        $statement = $conn->prepare("insert into comment (`comment`,`userid`,`taskid`) VALUES (:comment,:userid,:taskid)");
+        $statement = $conn->prepare("insert into comment (`comment`,`userid`,`todoid`) VALUES (:comment,:userid,:taskid)");
         $statement->bindValue(":comment", $comment->getComment());
         $statement->bindValue(":userid", $comment->getUserid());
         $statement->bindValue(":taskid", $comment->getTaskid());
@@ -39,7 +39,7 @@ class Dalcomment {
         $comment = new Comment();
         $comment->setComment($result["comment"]);
         $comment->setId($result["id"]);
-        $comment->setTask(Daltask::getTasksById($result["taskid"]));
+        $comment->setTask(Daltask::getTasksById($result["todoid"]));
         $comment->setUser(Daluser::getUserById($result["userid"]));
         $comment->setEdited(($result["edited"]));
         return $comment;
@@ -71,7 +71,7 @@ class Dalcomment {
     public static function getCommentsByTaskId(int $taskid){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from comment WHERE taskid = :taskid");
+        $statement = $conn->prepare("select * from comment WHERE todoid = :taskid");
         $statement->bindParam(":taskid", $taskid);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -82,7 +82,7 @@ class Dalcomment {
             $comment = new Comment();
             $comment->setComment($result["comment"]);
             $comment->setId($result["id"]);
-            $comment->setTask(Daltask::getTasksById($result["taskid"]));
+            $comment->setTask(Daltask::getTasksById($result["todoid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
             $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
@@ -95,7 +95,7 @@ class Dalcomment {
 
         $conn = Db::getConnection();
         $statement = $conn->prepare("select * from comment WHERE userid = :userid");
-        $statement->bindParam(":userid", $userid);
+        $statement->bindParam(":userid", $Userid);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $comments = [];
@@ -105,7 +105,7 @@ class Dalcomment {
             $comment = new Comment();
             $comment->setComment($result["comment"]);
             $comment->setId($result["id"]);
-            $comment->setTask(Daltask::getTasksById($result["taskid"]));
+            $comment->setTask(Daltask::getTasksById($result["todoid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
             $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
@@ -113,6 +113,7 @@ class Dalcomment {
         return $comments;
 
     }
+
     public static function updateComment(Comment $comment){
 
         $conn = Db::getConnection();
