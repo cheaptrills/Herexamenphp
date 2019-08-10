@@ -25,7 +25,7 @@ $lists = Dallist::getListById($listid);
     <div>
     <?php 
     foreach($lists->getTodos() as $todo){
-        echo("<p>{$todo->getTitle()}</p>");
+        echo("<p><a href='task.php?taskid={$todo->getId()}'>{$todo->getTitle()}</a></p>");
     } 
     ?>
     </div>

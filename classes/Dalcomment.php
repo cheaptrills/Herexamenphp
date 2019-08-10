@@ -39,7 +39,7 @@ class Dalcomment {
         $comment = new Comment();
         $comment->setComment($result["comment"]);
         $comment->setId($result["id"]);
-        $comment->setTask(Daltask::getTasksById($result["todoid"]));
+        $comment->setTask(Daltask::getTaskById($result["todoid"]));
         $comment->setUser(Daluser::getUserById($result["userid"]));
         $comment->setEdited(($result["edited"]));
         return $comment;
@@ -59,7 +59,7 @@ class Dalcomment {
             $comment = new Comment();
             $comment->setComment($result["comment"]);
             $comment->setId($result["id"]);
-            $comment->setTask(Daltask::getTasksById($result["todoid"]));
+            $comment->setTask(Daltask::getTaskById($result["todoid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
             $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
@@ -82,7 +82,7 @@ class Dalcomment {
             $comment = new Comment();
             $comment->setComment($result["comment"]);
             $comment->setId($result["id"]);
-            $comment->setTask(Daltask::getTasksById($result["todoid"]));
+            $comment->setTask(Daltask::getTaskById($result["todoid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
             $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
@@ -105,7 +105,7 @@ class Dalcomment {
             $comment = new Comment();
             $comment->setComment($result["comment"]);
             $comment->setId($result["id"]);
-            $comment->setTask(Daltask::getTasksById($result["todoid"]));
+            $comment->setTask(Daltask::getTaskById($result["todoid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
             $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);

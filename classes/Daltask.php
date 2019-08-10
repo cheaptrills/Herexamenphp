@@ -110,7 +110,7 @@ class Daltask {
 
     }
 
-    public static function getTasksById(int $id){
+    public static function getTaskById(int $id){
         $conn = Db::getConnection();
         $statement = $conn->prepare("select * from todo WHERE id = :id");
         $statement->bindParam(":id", $id);
