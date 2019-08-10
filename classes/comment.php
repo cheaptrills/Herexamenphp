@@ -8,6 +8,30 @@ class Comment {
     private User $user;
     private int $taskid;
     private int $userid;
+    private bool $edited;
+
+/**
+ * Getter for Edited
+ *
+ * @return [type]
+ */
+public function getEdited()
+{
+    return $this->edited;
+}
+
+/**
+ * Setter for Edited
+ * @var [type] edited
+ *
+ * @return self
+ */
+public function setEdited($edited)
+{
+    $this->edited = $edited;
+    return $this;
+}
+
 
     /**
      * Getter for Taskid

@@ -41,6 +41,7 @@ class Dalcomment {
         $comment->setId($result["id"]);
         $comment->setTask(Daltask::getTasksById($result["taskid"]));
         $comment->setUser(Daluser::getUserById($result["userid"]));
+        $comment->setEdited(($result["edited"]));
         return $comment;
 
     }
@@ -60,6 +61,7 @@ class Dalcomment {
             $comment->setId($result["id"]);
             $comment->setTask(Daltask::getTasksById($result["taskid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
+            $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
         }
         return $comments;
@@ -82,6 +84,7 @@ class Dalcomment {
             $comment->setId($result["id"]);
             $comment->setTask(Daltask::getTasksById($result["taskid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
+            $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
         }
         return $comments;
@@ -104,9 +107,27 @@ class Dalcomment {
             $comment->setId($result["id"]);
             $comment->setTask(Daltask::getTasksById($result["taskid"]));
             $comment->setUser(Daluser::getUserById($result["userid"]));
+            $comment->setEdited(($result["edited"]));
             array_push($comments,$comment);
         }
         return $comments;
 
+    }
+    public static function updateComment(Comment $comment){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE comment SET comment= :comment edited = true WHERE id = :id");
+        $statement->bindValue(":id", $comment->getId());
+        $statement->bindValue(":comment", $comment->getComment());
+        
+        $statement->execute();
+    }
+
+    public static function deleteCommentById(int $id){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("DELETE FROM `comment` WHERE id = :id");
+        $statement->bindParam(":id", $id);
+        $statement->execute();
     }
 }
