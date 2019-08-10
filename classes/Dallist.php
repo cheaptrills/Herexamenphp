@@ -62,5 +62,12 @@ class Dallist{
         return $list;
 
     }
+
+    public static function getListCount(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT count(*) AS lCount FROM list");
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result["lCount"];
+    }
 }
-// NONE SHALL PASS

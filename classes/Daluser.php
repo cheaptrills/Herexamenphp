@@ -100,10 +100,59 @@ class Daluser {
         $user = new user();
         $user-> setUsername($result["username"]);
         $user-> setPassword($result["password"]);
+        $user-> setIsAdmin($result["isAdmin"]);
         $user-> setId($result["id"]);
         return $user;
-        
+    }
+
+    public static function getAllUsers(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from user");
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $users = [];
+        foreach($result as $rUser){
+            $user = new User();
+            $user-> setUsername($rUser["username"]);
+            $user-> setPassword($rUser["password"]);
+            $user-> setIsAdmin($rUser["isAdmin"]);
+            $user-> setId($rUser["id"]);
+            array_push($users, $user);
+        }
+        return $users;
     }
     
+    public static function getUserById($id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from user where id = :id");
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        $user = new user();
+        $user-> setUsername($result["username"]);
+        $user-> setPassword($result["password"]);
+        $user-> setIsAdmin($result["isAdmin"]);
+        $user-> setId($result["id"]);
+        return $user;
+    }
+
+    public static function UpdateUser(User $u){
+        // UPDATE `user` SET `password`=:password,`isAdmin`=:isAdmin WHERE id = :id
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE `user` SET `password`=:password,`isAdmin`=:isAdmin WHERE id = :id");
+        $statement->bindParam(":id", $u->getId());
+        $statement->bindParam(":password", $u->getPassword());
+        $statement->bindParam(":isAdmin", $u->getIsAdmin());
+        return $statement->execute();
+    }
+
+    public static function getUserCount(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT count(*) AS uCount FROM user");
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result["uCount"];
+    }
 }
  
