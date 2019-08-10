@@ -6,6 +6,54 @@ class Comment {
     private int $id;
     private Task $task;
     private User $user;
+    private int $taskid;
+    private int $userid;
+
+    /**
+     * Getter for Taskid
+     *
+     * @return [type]
+     */
+    public function getTaskid()
+    {
+        return $this->taskid;
+    }
+
+    /**
+     * Setter for Taskid
+     * @var [type] taskid
+     *
+     * @return self
+     */
+    public function setTaskid($taskid)
+    {
+        $this->taskid = $taskid;
+        return $this;
+    }
+
+
+    /**
+     * Getter for Userid
+     *
+     * @return [type]
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     * Setter for Userid
+     * @var [type] userid
+     *
+     * @return self
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+        return $this;
+    }
+
 
 /**
  * Getter for Comment
@@ -72,6 +120,7 @@ public function setComment($comment)
     public function setTask($task)
     {
         $this->task = $task;
+        $this->taskid = $task->getId();
         return $this;
     }
 
@@ -95,6 +144,7 @@ public function setComment($comment)
     public function setUser($user)
     {
         $this->user = $user;
+        $this->userid = $user->getId();
         return $this;
     }
 
