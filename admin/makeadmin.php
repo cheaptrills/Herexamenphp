@@ -1,10 +1,10 @@
 <?php
-require_once("autoload/autoload.php");
+require_once("../autoload/autoload.php");
 User::userLoggedIn();
 
 $user = Daluser::getUserByName($_SESSION["username"]);
 if(!$user->getIsAdmin()){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 if(!isset($_GET["id"])){
     header("Location: admin.php");
