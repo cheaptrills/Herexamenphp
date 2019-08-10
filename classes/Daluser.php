@@ -76,9 +76,34 @@ class Daluser {
         }
     }
 
-    // check if the user is logged in
-    public static function userLoggedIn() {
-        if( isset($_SESSION['username']) ){ /* User is logged in, no redirect needed! */ }
-        else{ /* User is not logged in, redirect to login.php! */ header("location: login.php"); }
+    public static function getUserId()
+    {
+        $sessionUsername = $_SESSION['username'];
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select id from user where username = :username");
+        $statement->bindParam(":username", $sessionUsername);
+        $statement->execute();
+        $user_id = $statement->fetch(PDO::FETCH_ASSOC);
+        $user_id = $user_id['id'];
+        return $user_id;
+
     }
+
+    public static function getUserByName(string $name){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from user where username = :username");
+        $statement->bindParam(":username", $name);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = new user();
+        $user-> setUsername($result["username"]);
+        $user-> setPassword($result["password"]);
+        $user-> setId($result["id"]);
+        return $user;
+        
+    }
+    
 }
+ 
