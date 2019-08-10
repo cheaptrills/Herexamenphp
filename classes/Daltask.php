@@ -8,11 +8,12 @@ class Daltask {
         $user_id = Daluser::getUserId();
         $conn->beginTransaction();
 
-        $statement = $conn->prepare("insert into todo (`title`,`date`,`work`,`listid`) VALUES (:title,:date,:workload,:listid)");
+        $statement = $conn->prepare("insert into todo (`title`,`date`,`work`,`listid`,`userid`) VALUES (:title,:date,:workload,:listid,:userid)");
         $statement->bindParam(":title", $title);
         $statement->bindParam(":date", $date);
         $statement->bindParam(":workload", $workload);
         $statement->bindParam(":listid", $listid);
+        $statement->bindParam(":userid", $user_id);
         $result = $statement->execute();
         $lstId = $conn->lastInsertId();
         $conn->commit();
@@ -77,7 +78,7 @@ class Daltask {
 
         foreach($result as $item){
             $task = new Task();
-            $task->setTitle($item["name"]);
+            $task->setTitle($item["title"]);
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
@@ -107,5 +108,23 @@ class Daltask {
         }
         return $items;
 
+    }
+
+    public static function getTasksById(int $id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * from todo WHERE id = :id");
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $task = new Task();
+        $task->setTitle($result["title"]);
+        $task->setId($result["id"]);
+        $task->setDate($result["date"]);
+        $task->setWork($result["work"]);
+        $task->setListid($result["listid"]);
+        
+
+        return $task;
     }
 }

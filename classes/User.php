@@ -1,6 +1,6 @@
 <?php
 
-class User
+class User implements JsonSerializable
 {
     private $id;
     private $username;
@@ -8,6 +8,9 @@ class User
     private $passwordConfirmation;
     private $IsAdmin;
 
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
 /**
  * Getter for IsAdmin
  *

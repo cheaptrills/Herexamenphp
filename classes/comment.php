@@ -1,14 +1,18 @@
 <?php
 
-class Comment {
+class Comment implements JsonSerializable  {
 
-    private string $comment;
-    private int $id;
-    private Task $task;
-    private User $user;
-    private int $taskid;
-    private int $userid;
-    private bool $edited;
+    private $comment;
+    private $id;
+    private $task;
+    private $user;
+    private $taskid;
+    private $userid;
+    private $edited;
+
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
 
 /**
  * Getter for Edited

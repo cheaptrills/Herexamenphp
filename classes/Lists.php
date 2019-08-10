@@ -1,10 +1,15 @@
 <?php
 
-class Lists {
+class Lists implements JsonSerializable {
 
     private $title;
     private $id;
     private $todos;
+
+
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
 
 /**
  * Getter for Todos

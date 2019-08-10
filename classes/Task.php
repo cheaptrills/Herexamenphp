@@ -1,6 +1,6 @@
 <?php
 
-class Task {
+class Task implements JsonSerializable {
     private $title;
     private $date;
     private $work;
@@ -8,6 +8,11 @@ class Task {
     private $comment;
     private $id;
     private $listid;
+
+
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
 
 /**
  * Getter for Title
