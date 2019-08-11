@@ -26,7 +26,31 @@ const postComment = async (comment, taskid) => {
 }
 let postbtn = document.getElementById("postBtn");
 postbtn.onclick = ()=>post(getAllUrlParams(window.location.href).taskid);
+ 
 
+const toggle = (taskid) => {
+    markTask(taskid);
+    location.reload();
+}
+
+const markTask = async (taskid) => {
+
+        data = {
+            taskid: taskid,   
+        };
+
+        const toGetParams = `taskid=${data.taskid}`; //query van comment aanmaken
+        try{
+            await axios.post("ajax/toggleTask.php?" + toGetParams) // stuurt query naar server 
+        } catch (e){
+            console.log(e);
+        }
+    
+    
+}
+
+let markbtn = document.getElementById("markbutton");
+markbtn.onclick = ()=>toggle(getAllUrlParams(window.location.href).taskid);
 
 //test.forEach((btn)=>{
 //  const id = btn.dataset.id;
