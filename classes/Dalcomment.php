@@ -49,7 +49,7 @@ class Dalcomment {
     public static function getComments(){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from comment");
+        $statement = $conn->prepare("select * from comment ORDER BY id DESC");
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $comments = [];
@@ -71,7 +71,7 @@ class Dalcomment {
     public static function getCommentsByTaskId(int $taskid){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from comment WHERE todoid = :taskid");
+        $statement = $conn->prepare("select * from comment WHERE todoid = :taskid ORDER BY id DESC");
         $statement->bindParam(":taskid", $taskid);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -94,7 +94,7 @@ class Dalcomment {
     public static function getCommentsByUserId(int $Userid){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from comment WHERE userid = :userid");
+        $statement = $conn->prepare("select * from comment WHERE userid = :userid ORDER BY id DESC");
         $statement->bindParam(":userid", $Userid);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);

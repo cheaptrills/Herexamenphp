@@ -2,8 +2,7 @@
 
 class Dallist{
     
-    public static function saveList($title)
-    {
+    public static function saveList($title){
         // get a connection with the database
         $conn = Db::getConnection();
         $user_id = Daluser::getUserId();

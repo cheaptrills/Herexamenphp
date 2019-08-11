@@ -16,7 +16,7 @@ $lists = Dallist::getLists();
     <a href="addlist.php">add list</a>
     <?php
     foreach($lists as $list){
-        echo("<p><a href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a></p>");
+        echo("<p><a href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a> </p>");
     }
     ?>
 </body>

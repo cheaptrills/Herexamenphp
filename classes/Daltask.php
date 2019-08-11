@@ -52,7 +52,7 @@ class Daltask {
     public static function getTasksByListId($listid){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from todo WHERE listid = :id");
+        $statement = $conn->prepare("select * from todo WHERE listid = :id ORDER BY date DESC");
         $statement->bindParam(":id", $listid);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -75,7 +75,7 @@ class Daltask {
     public static function getTasks(){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from todo");
+        $statement = $conn->prepare("select * from todo ORDER BY date DESC");
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $items = [];
@@ -97,7 +97,7 @@ class Daltask {
     public static function getTasksByUserId($userid){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("select * from todo WHERE userid = :id");
+        $statement = $conn->prepare("select * from todo WHERE userid = :id ORDER BY date DESC");
         $statement->bindParam(":id", $userid);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
