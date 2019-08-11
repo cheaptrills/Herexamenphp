@@ -41,6 +41,8 @@ class Daltask {
         $task->setId($result["id"]);
         $task->setDate($result["date"]);
         $task->setWork($result["work"]);
+        $task->setDone($result["done"]);
+        $task->setUserid($result["userid"]);
         $task->setListid($result["listid"]);
         
 
@@ -62,6 +64,8 @@ class Daltask {
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
+            $task->setDone($item["done"]);
+            $task->setUserid($item["userid"]);
             $task->setListid($item["listid"]);
             array_push($items,$task);
         }
@@ -82,6 +86,8 @@ class Daltask {
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
+            $task->setDone($item["done"]);
+            $task->setUserid($item["userid"]);
             $task->setListid($item["listid"]);
             array_push($items,$task);
         }
@@ -103,6 +109,8 @@ class Daltask {
             $task->setId($item["id"]);
             $task->setDate($item["date"]);
             $task->setWork($item["work"]);
+            $task->setDone($item["done"]);
+            $task->setUserid($item["userid"]);
             $task->setListid($item["listid"]);
             array_push($items,$task);
         }
@@ -122,6 +130,8 @@ class Daltask {
         $task->setId($result["id"]);
         $task->setDate($result["date"]);
         $task->setWork($result["work"]);
+        $task->setDone($result["done"]);
+        $task->setUserid($result["userid"]);
         $task->setListid($result["listid"]);
         
 

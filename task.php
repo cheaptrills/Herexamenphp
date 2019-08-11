@@ -31,6 +31,7 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
         <p> 
             <?php echo htmlspecialchars($task->getWork()) ?>
         </p>
+        <button id="markbutton">mark</button>
     </div>
     <div>
         <!-- Comemnets -->
