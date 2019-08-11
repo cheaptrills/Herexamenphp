@@ -6,11 +6,12 @@ if(!isset($_GET['taskid'])){
 
 } 
 $task = Daltask::getTaskById($_GET['taskid']);
-$comment = Dalcomment::getCommentsByTaskId($task->getId());
+$comments = Dalcomment::getCommentsByTaskId($task->getId());
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <script src="js/getParameters.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
@@ -21,15 +22,43 @@ $comment = Dalcomment::getCommentsByTaskId($task->getId());
 <body>
     <div>
         <!-- Task details -->
+        <p> 
+            <?php echo htmlspecialchars($task->getTitle()) ?>
+        </p>
+        <p> 
+            <?php echo htmlspecialchars($task->getDate()) ?>
+        </p>
+        <p> 
+            <?php echo htmlspecialchars($task->getWork()) ?>
+        </p>
     </div>
     <div>
         <!-- Comemnets -->
         <div>
             <!-- Comments input + send button -->
+            <input type="text" id="commentbox">
+            <button id="postBtn">add comment</button>
         </div>
         <div>
             <!-- All the comments that have been writen -->
+            <?php
+            if(!empty($comments)){
+                foreach($comments as $comment){
+                ?>
+                <div class="comments">
+                <p> 
+                <?php echo htmlspecialchars($comment->getComment()) ?>
+                </p>
+                <p>
+                <?php echo htmlspecialchars($comment->getUser()->getUsername())?>
+                </p>
+                 </div>
+                <?php
+                }
+            }
+            ?>
         </div>
     </div>
+    <script src="js/comment.js"></script>
 </body>
 </html>

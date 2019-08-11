@@ -1,5 +1,6 @@
 //Deze code komt van https://www.sitepoint.com/get-url-parameters-with-javascript/
 
+
 function getAllUrlParams(url) {
 
     // get query string from url (optional) or window

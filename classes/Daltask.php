@@ -127,4 +127,16 @@ class Daltask {
 
         return $task;
     }
+
+    public static function updateTask(Task $task){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE todo SET title=:title,done=:done,`date`=:date,work=:work WHERE id = :id");
+        $statement->bindValue(":id", $task->getId());
+        $statement->bindValue(":title", $task->getTitle());
+        $statement->bindValue(":done", $task->getDone());
+        $statement->bindValue(":date", $task->getDate()); 
+        $statement->bindValue(":work", $task->getWork()); 
+        $statement->execute();
+    }
 }

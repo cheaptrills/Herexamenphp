@@ -117,7 +117,7 @@ class Dalcomment {
     public static function updateComment(Comment $comment){
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE comment SET comment= :comment edited = true WHERE id = :id");
+        $statement = $conn->prepare("UPDATE comment SET comment= :comment, edited = true WHERE id = :id");
         $statement->bindValue(":id", $comment->getId());
         $statement->bindValue(":comment", $comment->getComment());
         
