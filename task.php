@@ -32,7 +32,11 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
             <?php echo htmlspecialchars($task->getWork()) ?>
         </p>
         <button id="markbutton">Mark</button>
-        <button id="edittask">Edit</button>
+        <?php
+       // if($userid === $task["taskid"]){
+       //    echo "<a href='edit.php?id=$id' class='btnEdit' >edit post</a>";
+       // }
+        ?>
     </div>
     <div>
         <!-- Comemnets -->
