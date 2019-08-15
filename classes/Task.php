@@ -1,6 +1,6 @@
 <?php
 
-class Task {
+class Task implements JsonSerializable {
     private $title;
     private $date;
     private $work;
@@ -8,6 +8,35 @@ class Task {
     private $comment;
     private $id;
     private $listid;
+    private $userid;
+
+/**
+ * Getter for Userid
+ *
+ * @return [type]
+ */
+public function getUserid()
+{
+    return $this->userid;
+}
+
+/**
+ * Setter for Userid
+ * @var [type] userid
+ *
+ * @return self
+ */
+public function setUserid($userid)
+{
+    $this->userid = $userid;
+    return $this;
+}
+
+
+
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
 
 /**
  * Getter for Title
@@ -167,6 +196,18 @@ public function setTitle($title)
     {
         $this->listid = $listid;
         return $this;
+    }
+
+    //met hulp van https://stackoverflow.com/questions/7474762/php-get-how-many-days-and-hours-left-from-a-date
+    public function getRemaining(){
+
+        $date=strtotime($this->date);
+        //Calculate difference
+        $diff=$date - time();//time returns current time in seconds
+        $days=floor($diff/(60*60*24));//seconds/minute*minutes/hour*hours/day)
+        $hours=round(($diff-$days*60*60*24)/(60*60));
+        return "$days days $hours hours remaining";
+
     }
 
     

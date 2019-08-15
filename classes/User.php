@@ -1,11 +1,38 @@
 <?php
 
-class User
+class User implements JsonSerializable
 {
     private $id;
     private $username;
     private $password;
     private $passwordConfirmation;
+    private $IsAdmin;
+
+    public function jsonSerialize(){
+        return(get_object_vars ($this));
+    }
+/**
+ * Getter for IsAdmin
+ *
+ * @return [type]
+ */
+public function getIsAdmin()
+{
+    return $this->IsAdmin;
+}
+
+/**
+ * Setter for IsAdmin
+ * @var [type] IsAdmin
+ *
+ * @return self
+ */
+public function setIsAdmin($IsAdmin)
+{
+    $this->IsAdmin = $IsAdmin;
+    return $this;
+}
+
 
      /**
      * @return id

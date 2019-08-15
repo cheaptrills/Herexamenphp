@@ -1,0 +1,33 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.loginPage{
+    background-color: orange;
+}
+
+.login{
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    margin-top: 25%;
+}
+#username{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 2px;
+}
+#password{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 2px;
+}
+#passwordConfirmation{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 2px; 
+}
+.formField{
+    margin: 20px;
+
+}
