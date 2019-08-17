@@ -17,21 +17,25 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <div>
         <!-- Task details -->
-        <p> 
+        <h1> 
             <?php echo htmlspecialchars($task->getTitle()) ?>
-        </p>
-        <p> 
+        </h1>
+        <h2> 
             <?php echo htmlspecialchars($task->getDate()) ?>
-        </p>
-        <p> 
+        </h2>
+        <h3> 
             <?php echo htmlspecialchars($task->getWork()) ?>
-        </p>
-        <button id="markbutton">Mark</button>
+        </h3>
+        <button id="markbutton" class="btn btn-primary">Mark</button>
         <?php
        // if($userid === $task["taskid"]){
        //    echo "<a href='edit.php?id=$id' class='btnEdit' >edit post</a>";
@@ -43,7 +47,7 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
         <div>
             <!-- Comments input + send button -->
             <input type="text" id="commentbox">
-            <button id="postBtn">add comment</button>
+            <button class="btn btn-primary" id="postBtn">add comment</button>
         </div>
         <div>
             <!-- All the comments that have been writen -->
@@ -51,18 +55,45 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
             if(!empty($comments)){
                 foreach($comments as $comment){
                 ?>
-                <div class="comments">
-                <p> 
-                <?php echo htmlspecialchars($comment->getComment()) ?>
-                </p>
-                <p>
-                <?php echo htmlspecialchars($comment->getUser()->getUsername())?>
-                </p>
-                 </div>
+                <div class="col-sm-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><?php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
+                        </div>
+                        <div class="panel-body">
+                            <?php echo htmlspecialchars($comment->getComment()) ?>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
                 <?php
                 }
             }
             ?>
+
+
+<div class="col-sm-5">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong><?php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
+</div>
+<div class="panel-body">
+<?php echo htmlspecialchars($comment->getComment()) ?>
+</div>
+</div>
+</div>
+</div>
+<!-- 
+<div class="comments">
+<p> 
+<php echo htmlspecialchars($comment->getComment()) ?>
+</p>
+<p>
+<php echo htmlspecialchars($comment->getUser()->getUsername())?>
+</p>
+</div> -->
+
+
         </div>
     </div>
     <script src="js/comment.js"></script>

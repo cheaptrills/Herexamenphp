@@ -28,12 +28,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="style/register.css">
+    <link rel="stylesheet" href="style/bootstrap.css">
     <title>register</title>
 </head>
 <body class="registerPage">
 
-<div class="register">
+<div class="container">
     <div class="form formLogin formRegister">
 
 
@@ -49,22 +49,21 @@
             <?php endif; ?>
 
             <div class="formInput">
-                <div class="formField">
-                    <label for="username">Username</label>
-                    <p id="usernameFeedback" class="ajaxFeedback hidden"></p>
+                <div class="form-group">
+                    <label for="username" alert alert-success>Username</label>
                     <input type="text" id="username" name="username">
                 </div>
-                <div class="formField">
-                    <label for="password">Password</label>
+                <div class="form-group">
+                    <label for="password" alert alert-success>Password</label>
                     <input type="password" name="password" id="password">
                 </div>
-                <div class="formField">
-                    <label for="passwordConfirm">Password Confirmation</label>
+                <div class="form-group">
+                    <label for="passwordConfirm" alert alert-success>Password Confirmation</label>
                     <input type="password" name="passwordConfirm" id="passwordConfirm">
                 </div>
 
-                <div class="formField">
-                    <input type="submit" value="Sign up" class="btn btnPrimary">
+                <div class="form-group">
+                    <input type="submit" value="Sign up" class="btn-primary">
                 </div>
             </div>
 

@@ -69,4 +69,20 @@ class Dallist{
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result["lCount"];
     }
+
+    public static function deleteList($userid, $title) {
+        try {
+                    $conn = Db::getConnection();
+                    $statemennt = $conn->prepare("DELETE FROM list WHERE name = :name AND user_id = :user_id" );
+                    $statemennt->bindParam(":name", $listname);
+                    $statemennt->bindParam(":user_id", $userid);
+                    $statemennt->execute();
+
+                    return true;
+
+            } catch ( Throwable $t ) {
+                return false;
+
+            }
+    }
 }
