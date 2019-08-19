@@ -12,18 +12,38 @@ $lists = Dallist::getLists();
     <title>Vince's to do</title>
 </head>
 <body>
-<div class="container">
-    <div class="cars-title">Vince's To-Do list application</div>
-    <a href="addlist.php" class="btn btn-primary white">add list</a>
-    <a href="logout.php" class="btn btn-primary white">logout</a>
-    <div id="center">
-    <p>Current lists</p>
+    <a href="logout.php" class="btn btn-primary" id="logout">Logout</a>
+    <div class="container">
+    <div class="create-group">
+            <a href="addlist.php" class="btn btn-success">add list</a>
     </div>
-        <?php
-            foreach($lists as $list){
-                echo("<p><a class='list' href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a> </p>");
-            }
-        ?>
-</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach($lists as $list){
+                    echo("
+                    <tr>
+                        <td>
+                            <a class='list' href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a>
+                        </td>
+                        <td>
+                            <a class='btn btn-danger delete' href=''>Delete</a>
+                        </td>
+                    
+                    </tr>");
+                }
+            ?>
+        </tbody>
+    </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/createlist.js"></script>
 </body>
-</html>

@@ -15,20 +15,41 @@ $lists = Dallist::getListById($listid);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=p, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Done tasks</title>
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
 </head>
 <body>
-    <div>
-    <p>title: <?php echo($lists->getTitle());  ?></p>
+    <div class="container">
+        
+        <h1>title: <?php echo($lists->getTitle());  ?></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>task</th>
+                    <th>unmark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($lists->getTodos() as $todo){
+                        if($todo->getDone()){
+                            echo(
+                                "<tr>
+                                    <td>
+                                        <a href='task.php?taskid={$todo->getId()}'>{$todo->getTitle()}</a>
+                                    </td>
+                                    <td>
+                                        <button class='markbutton btn btn-primary' data-id='{$todo->getId()}'>unMark</button>
+                                    </td>
+                                </tr>"
+                            );
+                        }
+                    } 
+                ?>
+            </tbody>   
+        </table>  
     </div>
-    <div>
-    <?php 
-    foreach($lists->getTodos() as $todo){
-        if($todo->getDone()){
-            echo("<p><a href='task.php?taskid={$todo->getId()}'>{$todo->getTitle()}</a></p>");
-        }
-    } 
-    ?>
-    </div>
+    <script src="js/comment.js"></script>
 </body>
 </html>

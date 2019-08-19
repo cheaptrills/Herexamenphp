@@ -15,30 +15,52 @@ $lists = Dallist::getListById($listid);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=p, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/list.css">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="blok">
-        <p>title: <?php echo($lists->getTitle());  ?></p>
-            <div>
-                <a href="addtask.php?listid=<?php echo($listid) ?>">Add Task</a>
-            </div>
-            <div>
-                <a href="done.php?listid=<?php echo($listid) ?>">Done tasks</a>
-            </div>
-            <div>
+    <div class="container">
+    <div class="table">
+        <h1>title: <?php echo($lists->getTitle());  ?></h1>
+        <div>
+             <a class='btn btn-primary' href="addtask.php?listid=<?php echo($listid) ?>">Add Task</a>
+        </div>
+        <div>
+            <a class='btn btn-primary' href="done.php?listid=<?php echo($listid) ?>">Done tasks</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>task</th>
+                    <th>remaining</th>
+                    <th>mark</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php 
                 foreach($lists->getTodos() as $todo){
                     if(!$todo->getDone()){
-                        echo("<p class='task'>
+                        echo(
+                            "<tr>
+                            <td>
                                 <a class='item' href='task.php?taskid={$todo->getId()}'>{$todo->getTitle()}</a> 
+                            </td>
+                            <td>
                                 <div class='time'>{$todo->getRemaining()}</div>
-                              </p>");
+                            </td>
+                            <td>
+                                <button class='markbutton btn btn-primary' data-id='{$todo->getId()}'>Mark</button>
+                            </td>
+                            </tr>"
+                        );
                     }
                 } 
                 ?>
-            </div>   
+            </tbody>   
+        </table>
     </div>
+    </div>
+    <script src="js/comment.js"></script>
 </body>
 </html>

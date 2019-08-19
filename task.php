@@ -18,22 +18,19 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style/bootstrap.css">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <div>
         <!-- Task details -->
         <h1> 
-            <?php echo htmlspecialchars($task->getTitle()) ?>
+            To Do=<?php echo htmlspecialchars($task->getTitle()) ?>
         </h1>
         <h2> 
-            <?php echo htmlspecialchars($task->getDate()) ?>
+            Deadline=<?php echo htmlspecialchars($task->getDate()) ?>
         </h2>
         <h3> 
-            <?php echo htmlspecialchars($task->getWork()) ?>
+            werkdruk=<?php echo htmlspecialchars($task->getWork()) ?>/20
         </h3>
         <button id="markbutton" class="btn btn-primary">Mark</button>
         <?php
@@ -71,18 +68,19 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
             }
             ?>
 
+    <!-- <div class="col-sm-5">
+        <div class="panel panel-default">
 
-<div class="col-sm-5">
-<div class="panel panel-default">
-<div class="panel-heading">
-<strong><?php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
-</div>
-<div class="panel-body">
-<?php echo htmlspecialchars($comment->getComment()) ?>
-</div>
-</div>
-</div>
-</div>
+            <div class="panel-heading">
+                <strong><php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
+            </div>
+
+            <div class="panel-body">
+                <php echo htmlspecialchars($comment->getComment()) ?>
+            </div>
+        </div>
+    </div> -->
+
 <!-- 
 <div class="comments">
 <p> 
