@@ -27,16 +27,19 @@ $lists = Dallist::getLists();
         <tbody>
             <?php
                 foreach($lists as $list){
-                    echo("
-                    <tr>
-                        <td>
-                            <a class='list' href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a>
-                        </td>
-                        <td>
-                            <a class='btn btn-danger delete' href=''>Delete</a>
-                        </td>
-                    
-                    </tr>");
+                    //remove if voor gezamelijke lijst
+                    if($list->getUserId()==Daluser::getUserId()){
+                        echo("
+                        <tr>
+                            <td>
+                                <a class='list' href='list.php?listid={$list->getId()}'>{$list->getTitle()}</a>
+                            </td>
+                            <td>
+                                <a class='btn btn-danger delete' href='deletelist.php?listid={$list->getId()}'>Delete</a>
+                            </td>
+                        
+                        </tr>");
+                    }
                 }
             ?>
         </tbody>
