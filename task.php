@@ -21,7 +21,8 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
     <title>Document</title>
 </head>
 <body>
-    <div>
+<div class="container">
+    <div >
         <!-- Task details -->
         <h1> 
             To Do=<?php echo ($task->getTitle()) ?>
@@ -67,33 +68,9 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
                 }
             }
             ?>
-
-    <!-- <div class="col-sm-5">
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <strong><php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
-            </div>
-
-            <div class="panel-body">
-                <php echo htmlspecialchars($comment->getComment()) ?>
-            </div>
-        </div>
-    </div> -->
-
-<!-- 
-<div class="comments">
-<p> 
-<php echo htmlspecialchars($comment->getComment()) ?>
-</p>
-<p>
-<php echo htmlspecialchars($comment->getUser()->getUsername())?>
-</p>
-</div> -->
-
-
         </div>
     </div>
     <script src="js/comment.js"></script>
+    </div>
 </body>
 </html>
