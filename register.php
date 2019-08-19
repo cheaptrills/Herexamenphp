@@ -6,9 +6,9 @@
 
     if( !empty($_POST) ){
 
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $passwordConfirm = $_POST['passwordConfirm'];
+            $username = htmlspecialchars($_POST['username']);
+            $password = htmlspecialchars($_POST['password']);
+            $passwordConfirm = htmlspecialchars($_POST['passwordConfirm']);
 
             //Try to start new user obj, set properties and call the register function
             try{
@@ -18,8 +18,6 @@
                 $error = $e->getMessage();
             }
     }
-    
-
 ?>
 <html lang="en">
 <head>

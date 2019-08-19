@@ -24,13 +24,13 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
     <div>
         <!-- Task details -->
         <h1> 
-            To Do=<?php echo htmlspecialchars($task->getTitle()) ?>
+            To Do=<?php echo ($task->getTitle()) ?>
         </h1>
         <h2> 
-            Deadline=<?php echo htmlspecialchars($task->getDate()) ?>
+            Deadline=<?php echo ($task->getDate()) ?>
         </h2>
         <h3> 
-            werkdruk=<?php echo htmlspecialchars($task->getWork()) ?>/20
+            werkdruk=<?php echo ($task->getWork()) ?>/20
         </h3>
         <button id="markbutton" class="btn btn-primary">Mark</button>
         <?php
@@ -55,10 +55,10 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
                 <div class="col-sm-5">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <strong><?php echo htmlspecialchars($comment->getUser()->getUsername())?></strong>
+                            <strong><?php echo $comment->getUser()->getUsername()?></strong>
                         </div>
                         <div class="panel-body">
-                            <?php echo htmlspecialchars($comment->getComment()) ?>
+                            <?php echo ($comment->getComment()) ?>
                         </div>
                     </div>
                     </div>

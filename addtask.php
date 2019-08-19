@@ -11,7 +11,7 @@ if (isset($_GET["listid"])){
 
 if (isset($_POST['upload'])){
 
-    $title = $_POST['title'];
+    $title = htmlspecialchars($_POST['title']);
     $date = $_POST['date'];
     $workload = $_POST['workload'];
     try{
@@ -37,7 +37,7 @@ if (isset($_POST['upload'])){
             }
 
         }
-
+        header("location: list.php?listid={$listid}");
     }catch( Exception $e){
         $error = $e->getMessage();
     }

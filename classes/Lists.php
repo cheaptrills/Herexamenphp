@@ -41,7 +41,7 @@ public function setTodos($todos)
  */
 public function getTitle()
 {
-    return $this->title;
+    return htmlspecialchars($this->title);
 }
 
 /**
