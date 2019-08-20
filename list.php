@@ -29,15 +29,12 @@ $lists = Dallist::getListById($listid);
         <div>
             <a class='btn btn-primary' href="done.php?listid=<?php echo($listid) ?>">Done tasks</a>
         </div>
-        <div>
-            <button onclick="sortTable()" class='btn btn-primary'>Sort</button>
-        </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>task</th>
                     <th>remaining</th>
-                    <th>werkdruk</th>
+                    <th onclick="sortTable()" class='btn btn-primary'>werkdruk</th>
                     <th>mark</th>
                 </tr>
             </thead>
