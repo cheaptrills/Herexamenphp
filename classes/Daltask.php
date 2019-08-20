@@ -152,13 +152,12 @@ class Daltask {
 
     public static function getAverageDay($day){
 
-    $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT AVG(work) AS avg_work FROM todo WHERE `date`=:date");
-    $statement->bindParam(":id", $listid);
-    $statement->execute();
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-    return $result["avg_work"];
-
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT AVG(work) AS avg_work FROM todo WHERE `date`=:date");
+        $statement->bindParam(":id", $listid);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result["avg_work"];
     }
 
 }

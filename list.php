@@ -29,11 +29,15 @@ $lists = Dallist::getListById($listid);
         <div>
             <a class='btn btn-primary' href="done.php?listid=<?php echo($listid) ?>">Done tasks</a>
         </div>
+        <div>
+            <button onclick="sortTable()">Sort</button>
+        </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>task</th>
                     <th>remaining</th>
+                    <th>werkdruk</th>
                     <th>mark</th>
                 </tr>
             </thead>
@@ -50,6 +54,9 @@ $lists = Dallist::getListById($listid);
                                 <div class='time'>{$todo->getRemaining()}</div>
                             </td>
                             <td>
+                                <div class='time'>{$todo->getWork()}</div>
+                            </td>
+                            <td>
                                 <button class='markbutton btn btn-primary' data-id='{$todo->getId()}'>Mark</button>
                             </td>
                             </tr>"
@@ -62,5 +69,6 @@ $lists = Dallist::getListById($listid);
     </div>
     </div>
     <script src="js/comment.js"></script>
+    <script src="js/sort.js"></script>
 </body>
 </html>
