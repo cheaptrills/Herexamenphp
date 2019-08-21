@@ -36,6 +36,7 @@ $lists = Dallist::getListById($listid);
                     <th>remaining</th>
                     <th onclick="sortTable()" class='btn btn-primary'>werkdruk</th>
                     <th>mark</th>
+                    <th>delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,9 @@ $lists = Dallist::getListById($listid);
                             </td>
                             <td>
                                 <button class='markbutton btn btn-primary' data-id='{$todo->getId()}'>Mark</button>
+                            </td>
+                            <td>
+                                <a class='btn btn-danger delete' href='deletetask.php?listid={$todo->getId()}'>Delete</a>
                             </td>
                             </tr>"
                         );

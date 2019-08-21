@@ -159,5 +159,19 @@ class Daltask {
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result["avg_work"];
     }
+    public static function deleteTask($userid, $todo) {
+        try {
+            $conn = Db::getConnection();
+            $statemennt = $conn->prepare("DELETE FROM todo WHERE id = :id AND userid = :userid" );
+            $statemennt->bindParam(":id", $todo);
+            $statemennt->bindParam(":userid", $userid);
+            $statemennt->execute();
 
+            return true;
+
+        } catch ( Throwable $t ) {
+                return false;
+
+            }
+    }
 }
