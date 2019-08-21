@@ -12,6 +12,7 @@ if (isset($_POST['upload'])){
 
     try{
         Dallist::saveList($title);
+        header("location:index.php");
 
     }catch( Exception $e){
         $error = $e->getMessage();
@@ -49,7 +50,7 @@ if (isset($_POST['upload'])){
 
             <div class="form-group">
                 <label for="title">title</label>
-                <textarea id="title" name="title" rows="1"></textarea>
+                <textarea id="title" name="title" rows="1" required></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" name="upload" class="btn btn-primary">add list<i class="hidden" id="loaderIcon"></i></button>
