@@ -21,7 +21,7 @@ function sortTable() {
       x = rows[i].getElementsByTagName("TD")[2];
       y = rows[i + 1].getElementsByTagName("TD")[2];
       //check if the two rows should switch place:
-      if (Number.parseInt(x.children[0].innerHTML) > Number.parseInt(y.children[0].innerHTML)) {
+      if (Number.parseInt(x.children[0].innerHTML) < Number.parseInt(y.children[0].innerHTML)) {
         //if so, mark as a switch and break the loop:
         shouldSwitch = true;
         break;

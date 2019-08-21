@@ -3,7 +3,10 @@
 class Daltask {
 
     public static function saveTask($title,$date,$workload,$listid){
-
+        
+        if(new DateTime($date) < new DateTime()){
+            return -1;
+        }
         $conn = Db::getConnection();
         $user_id = Daluser::getUserId();
         $conn->beginTransaction();
