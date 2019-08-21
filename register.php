@@ -13,7 +13,7 @@
             //Try to start new user obj, set properties and call the register function
             try{
                 Daluser::createUser($username,$password,$passwordConfirm);
-
+                header("location: login.php");
             }catch( Exception $e){
                 $error = $e->getMessage();
             }
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Sign up" class="btn-primary">
+                    <input type="submit" value="Sign up" class="btn-primary" >
                 </div>
             </div>
 
