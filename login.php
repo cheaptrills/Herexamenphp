@@ -6,8 +6,8 @@ if(isset($_SESSION['username'])){
 try{
     
     if (!empty($_POST)) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = htmlspecialchars($_POST['username']);
+        $password = htmlspecialchars($_POST['password']);
 
         if(!Daluser::login($username, $password)){ 
             $error = true;
@@ -51,7 +51,6 @@ try{
                         Sorry, we can't log you in with that username and password. Can you try again?
                     </p>
                 </div>
-                <?php endif; ?>
                 <div class="formInput">
                     <div class="form-group">
                         <label for="username">username</label>
