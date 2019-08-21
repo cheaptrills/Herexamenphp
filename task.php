@@ -5,8 +5,16 @@ if(!isset($_GET['taskid'])){
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 } 
-$task = Daltask::getTaskById($_GET['taskid']);
-$comments = Dalcomment::getCommentsByTaskId($task->getId());
+try {
+
+    $task = Daltask::getTaskById($_GET['taskid']);
+    $comments = Dalcomment::getCommentsByTaskId($task->getId());
+
+}catch( Exception $e){
+
+    $error = $e->getMessage();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +30,13 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
 </head>
 <body>
 <div class="container">
+    <?php if (isset($error)): ?>
+                    <div class="formError">
+                        <p>
+                            <?php echo $error ?>
+                        </p>
+                    </div>
+    <?php endif; ?>
     <div >
         <!-- Task details -->
         <h1> 

@@ -51,6 +51,11 @@ html {
 .panel {
 	position:relative;
 }
+
+.formError{
+  color:red;
+}
+
 .panel>.panel-heading:after,.panel>.panel-heading:before{
 	position:absolute;
 	top:11px;left:-16px;
@@ -254,6 +259,7 @@ label {
 button {
   border-radius: 0;
 }
+
 
 button:focus {
   outline: 1px dotted;

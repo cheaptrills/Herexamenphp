@@ -3,14 +3,19 @@ require_once("autoload/autoload.php");
 if(isset($_SESSION['username'])){
     header("location:index.php");
 }
+try{
+    
+    if (!empty($_POST)) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-if (!empty($_POST)) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if(!Daluser::login($username, $password)){ 
-        $error = true;
+        if(!Daluser::login($username, $password)){ 
+            $error = true;
+        }
     }
+
+}catch( Exception $e){
+    $error = $e->getMessage();
 }
 ?>
 <!doctype html>
@@ -35,6 +40,12 @@ if (!empty($_POST)) {
                 <h2 class="formTitle">Login</h2>
 
                 <?php if (isset($error)): ?>
+                <div class="formError">
+                    <p>
+                        <?php echo $error ?>
+                    </p>
+                </div>
+                <?php endif; ?>
                 <div class="alert-danger">
                     <p>
                         Sorry, we can't log you in with that username and password. Can you try again?

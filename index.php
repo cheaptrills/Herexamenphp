@@ -1,6 +1,10 @@
 <?php
 require_once("autoload/autoload.php");
+try{
 $lists = Dallist::getLists();
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +16,13 @@ $lists = Dallist::getLists();
     <title>Vince's to do</title>
 </head>
 <body>
+    <?php if (isset($error)): ?>
+            <div class="formError">
+                <p>
+                    <?php echo $error ?>
+                </p>
+            </div>
+    <?php endif; ?>
     <a href="logout.php" class="btn btn-primary" id="logout">Logout</a>
     <div class="container">
     <div class="create-group">

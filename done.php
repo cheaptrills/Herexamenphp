@@ -7,7 +7,11 @@ if(isset($_GET["listid"])){
 }else {
     header("location: index.php");
 }
-$lists = Dallist::getListById($listid);
+try{
+    $lists = Dallist::getListById($listid);
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +25,13 @@ $lists = Dallist::getListById($listid);
 </head>
 <body>
     <div class="container">
-        
+        <?php if (isset($error)): ?>
+            <div class="formError">
+                <p>
+                    <?php echo $error ?>
+                </p>
+            </div>
+        <?php endif; ?>
         <h1>title: <?php echo($lists->getTitle());  ?></h1>
         <table class="table">
             <thead>

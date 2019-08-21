@@ -6,7 +6,11 @@ if(isset($_GET["listid"])){
 }else {
     header("location: index.php");
 }
-$userid = Daluser::getUserId();
-$deletelist = Dallist::deleteList($userid,$listid);
+try{
+    $userid = Daluser::getUserId();
+    $deletelist = Dallist::deleteList($userid,$listid);
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
 header("location: index.php");
 ?>

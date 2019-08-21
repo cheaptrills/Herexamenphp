@@ -1,6 +1,10 @@
 <?php
 require_once("autoload/autoload.php");
-User::userLoggedIn();
+try{
+    User::userLoggedIn();
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
 
 if (isset($_POST['upload'])){
 
@@ -32,6 +36,13 @@ if (isset($_POST['upload'])){
 
 <body class="post">
     <div class="container">
+    <?php if (isset($error)): ?>
+        <div class="formError">
+            <p>
+                <?php echo $error ?>
+            </p>
+        </div>
+    <?php endif; ?>
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="flexbox postPage">
             <h1>Add list</h1>

@@ -7,7 +7,13 @@ if(isset($_GET["listid"])){
 }else {
     header("location: index.php");
 }
-$lists = Dallist::getListById($listid);
+try{
+    
+    $lists = Dallist::getListById($listid);
+
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +28,13 @@ $lists = Dallist::getListById($listid);
 <body>
     <div class="container">
     <div class="table">
+        <?php if (isset($error)): ?>
+            <div class="formError">
+                <p>
+                    <?php echo $error ?>
+                </p>
+            </div>
+        <?php endif; ?>
         <h1>title: <?php echo($lists->getTitle());  ?></h1>
         <div>
              <a class='btn btn-primary' href="addtask.php?listid=<?php echo($listid) ?>">Add Task</a>
@@ -58,7 +71,7 @@ $lists = Dallist::getListById($listid);
                                 <button class='markbutton btn btn-primary' data-id='{$todo->getId()}'>Mark</button>
                             </td>
                             <td>
-                                <a class='btn btn-danger delete' href='deletetask.php?listid={$todo->getId()}'>Delete</a>
+                                <a class='btn btn-danger delete' href='deletetask.php?taskid={$todo->getId()}'>Delete</a>
                             </td>
                             </tr>"
                         );
