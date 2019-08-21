@@ -22,6 +22,7 @@ class Dallist{
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         $list = new Lists();
+        $list->setUserid($result["userid"]);
         $list->setTitle($result["name"]);
         $list->setId($result["id"]);
         $list->setTodos(Daltask::getTasksByListId($result["id"]));
@@ -39,6 +40,7 @@ class Dallist{
 
         foreach($result as $item) {
             $_list = new Lists();
+            $_list->setUserid($item["userid"]);
             $_list->setTitle($item["name"]);
             $_list->setId($item["id"]);
             array_push($listitems,$_list);
@@ -68,5 +70,21 @@ class Dallist{
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result["lCount"];
+    }
+
+    public static function deleteList($userid, $title) {
+        try {
+            $conn = Db::getConnection();
+            $statemennt = $conn->prepare("DELETE FROM list WHERE id = :id AND userid = :userid" );
+            $statemennt->bindParam(":id", $title);
+            $statemennt->bindParam(":userid", $userid);
+            $statemennt->execute();
+
+            return true;
+
+        } catch ( Throwable $t ) {
+                return false;
+
+            }
     }
 }

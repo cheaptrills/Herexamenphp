@@ -3,7 +3,10 @@
 class Daltask {
 
     public static function saveTask($title,$date,$workload,$listid){
-
+        
+        if(new DateTime($date) < new DateTime()){
+            return -1;
+        }
         $conn = Db::getConnection();
         $user_id = Daluser::getUserId();
         $conn->beginTransaction();
@@ -93,7 +96,6 @@ class Daltask {
         }
         return $items;
     }
-
     public static function getTasksByUserId($userid){
 
         $conn = Db::getConnection();
@@ -117,7 +119,6 @@ class Daltask {
         return $items;
 
     }
-
     public static function getTaskById(int $id){
         $conn = Db::getConnection();
         $statement = $conn->prepare("select * from todo WHERE id = :id");
@@ -137,7 +138,6 @@ class Daltask {
 
         return $task;
     }
-
     public static function updateTask(Task $task){
 
         $conn = Db::getConnection();
@@ -148,5 +148,29 @@ class Daltask {
         $statement->bindValue(":date", $task->getDate()); 
         $statement->bindValue(":work", $task->getWork()); 
         $statement->execute();
+    }
+    public static function getAverageDay($day){
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT AVG(work) AS avg_work FROM todo WHERE `date`=:date");
+        $statement->bindParam(":id", $listid);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result["avg_work"];
+    }
+    public static function deleteTask($userid, $id) {
+        try {
+            $conn = Db::getConnection();
+            $statemennt = $conn->prepare("DELETE FROM todo WHERE id = :id AND userid = :userid" );
+            $statemennt->bindParam(":id", $id);
+            $statemennt->bindParam(":userid", $userid);
+            $statemennt->execute();
+
+            return true;
+
+        } catch ( Throwable $t ) {
+                return false;
+
+            }
     }
 }

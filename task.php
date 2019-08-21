@@ -5,8 +5,16 @@ if(!isset($_GET['taskid'])){
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 } 
-$task = Daltask::getTaskById($_GET['taskid']);
-$comments = Dalcomment::getCommentsByTaskId($task->getId());
+try {
+
+    $task = Daltask::getTaskById($_GET['taskid']);
+    $comments = Dalcomment::getCommentsByTaskId($task->getId());
+
+}catch( Exception $e){
+
+    $error = $e->getMessage();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,28 +25,42 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style/bootstrap.css">
     <title>Document</title>
 </head>
 <body>
-    <div>
+<div class="container">
+    <?php if (isset($error)): ?>
+                    <div class="formError">
+                        <p>
+                            <?php echo $error ?>
+                        </p>
+                    </div>
+    <?php endif; ?>
+    <div >
         <!-- Task details -->
-        <p> 
-            <?php echo htmlspecialchars($task->getTitle()) ?>
-        </p>
-        <p> 
-            <?php echo htmlspecialchars($task->getDate()) ?>
-        </p>
-        <p> 
-            <?php echo htmlspecialchars($task->getWork()) ?>
-        </p>
-        <button id="markbutton">mark</button>
+        <h1> 
+            To Do=<?php echo ($task->getTitle()) ?>
+        </h1>
+        <h2> 
+            Deadline=<?php echo ($task->getDate()) ?>
+        </h2>
+        <h3> 
+            werkdruk=<?php echo ($task->getWork()) ?>/20
+        </h3>
+        <button id="markbutton" class="btn btn-primary">Mark</button>
+        <?php
+       // if($userid === $task["taskid"]){
+       //    echo "<a href='edit.php?id=$id' class='btnEdit' >edit post</a>";
+       // }
+        ?>
     </div>
     <div>
         <!-- Comemnets -->
         <div>
             <!-- Comments input + send button -->
             <input type="text" id="commentbox">
-            <button id="postBtn">add comment</button>
+            <button class="btn btn-primary" id="postBtn">add comment</button>
         </div>
         <div>
             <!-- All the comments that have been writen -->
@@ -46,14 +68,17 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
             if(!empty($comments)){
                 foreach($comments as $comment){
                 ?>
-                <div class="comments">
-                <p> 
-                <?php echo htmlspecialchars($comment->getComment()) ?>
-                </p>
-                <p>
-                <?php echo htmlspecialchars($comment->getUser()->getUsername())?>
-                </p>
-                 </div>
+                <div class="col-sm-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><?php echo $comment->getUser()->getUsername()?></strong>
+                        </div>
+                        <div class="panel-body">
+                            <?php echo ($comment->getComment()) ?>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
                 <?php
                 }
             }
@@ -61,5 +86,6 @@ $comments = Dalcomment::getCommentsByTaskId($task->getId());
         </div>
     </div>
     <script src="js/comment.js"></script>
+    </div>
 </body>
 </html>

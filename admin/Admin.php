@@ -1,10 +1,17 @@
 <?php
 require_once("../autoload/autoload.php");
-User::userLoggedIn();
-
-$user = Daluser::getUserByName($_SESSION["username"]);
-if(!$user->getIsAdmin()){
-    header("Location: ../index.php");
+try{
+    User::userLoggedIn();
+}catch( Exception $e){
+    $error = $e->getMessage();
+}
+try{
+    $user = Daluser::getUserByName($_SESSION["username"]);
+    if(!$user->getIsAdmin()){
+        header("Location: ../index.php");
+    }
+}catch( Exception $e){
+    $error = $e->getMessage();
 }
 ?>
 <!DOCTYPE html>

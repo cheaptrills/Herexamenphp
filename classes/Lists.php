@@ -5,6 +5,30 @@ class Lists implements JsonSerializable {
     private $title;
     private $id;
     private $todos;
+    private $userid;
+
+/**
+ * Getter for Userid
+ *
+ * @return [type]
+ */
+public function getUserid()
+{
+    return $this->userid;
+}
+
+/**
+ * Setter for Userid
+ * @var [type] userid
+ *
+ * @return self
+ */
+public function setUserid($userid)
+{
+    $this->userid = $userid;
+    return $this;
+}
+
 
 
     public function jsonSerialize(){
@@ -41,7 +65,7 @@ public function setTodos($todos)
  */
 public function getTitle()
 {
-    return $this->title;
+    return htmlspecialchars($this->title);
 }
 
 /**

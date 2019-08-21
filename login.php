@@ -3,14 +3,19 @@ require_once("autoload/autoload.php");
 if(isset($_SESSION['username'])){
     header("location:index.php");
 }
+try{
+    
+    if (!empty($_POST)) {
+        $username = htmlspecialchars($_POST['username']);
+        $password = htmlspecialchars($_POST['password']);
 
-if (!empty($_POST)) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if(!Daluser::login($username, $password)){ 
-        $error = true;
+        if(!Daluser::login($username, $password)){ 
+            $error = true;
+        }
     }
+
+}catch( Exception $e){
+    $error = $e->getMessage();
 }
 ?>
 <!doctype html>
@@ -22,37 +27,42 @@ if (!empty($_POST)) {
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="style/bootstrap.css">
     <title>login</title>
 </head>
 
-<body class="loginPage">
+<body>
 
 
-    <div class="login">
-        <div class="form formLogin">
+    <div class="container">
+        <div class="form-group">
             <form action="" method="post">
                 <h2 class="formTitle">Login</h2>
 
                 <?php if (isset($error)): ?>
                 <div class="formError">
                     <p>
-                        Sorry, we can't log you in with that username and password. Can you try again?
+                        <?php echo $error ?>
                     </p>
                 </div>
                 <?php endif; ?>
+                <div class="alert-danger">
+                    <p>
+                        Sorry, we can't log you in with that username and password. Can you try again?
+                    </p>
+                </div>
                 <div class="formInput">
-                    <div class="formField">
+                    <div class="form-group">
                         <label for="username">username</label>
-                        <input type="text" name="username" id="username">
+                        <input type="text" name="username" id="username" class="form-control">
                     </div>
-                    <div class="formField">
+                    <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" id="password" class="form-control">
                     </div>
 
-                    <div class="formField">
-                        <input type="submit" value="login" class="btn btnPrimary">
+                    <div class="form-group">
+                        <input type="submit" value="login" class="btn-primary">
                         <!--                <input type="checkbox" id="rememberMe"><label for="rememberMe" class="labelInline">Remember me</label>-->
                     </div>
                 </div>

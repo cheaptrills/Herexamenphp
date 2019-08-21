@@ -24,8 +24,12 @@ const postComment = async (comment, taskid) => {
     }
     
 }
+
 let postbtn = document.getElementById("postBtn");
-postbtn.onclick = ()=>post(getAllUrlParams(window.location.href).taskid);
+
+if(postbtn  != null){
+    postbtn.onclick = ()=>post(getAllUrlParams(window.location.href).taskid);
+}
  
 
 const toggle = (taskid) => {
@@ -49,8 +53,22 @@ const markTask = async (taskid) => {
     
 }
 
-let markbtn = document.getElementById("markbutton");
-markbtn.onclick = ()=>toggle(getAllUrlParams(window.location.href).taskid);
+let markbtn = document.getElementById('markbutton');
+
+if(markbtn != null ){
+
+    markbtn.onclick = ()=>toggle(getAllUrlParams(window.location.href).taskid);
+
+} else {
+    let markbtns = document.querySelectorAll('.markbutton');
+
+    markbtns.forEach((btn)=>{
+        let btnid = btn.dataset.id;
+        btn.onclick = ()=>toggle(btnid);
+
+    })
+
+}
 
 //test.forEach((btn)=>{
 //  const id = btn.dataset.id;
