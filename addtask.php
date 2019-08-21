@@ -20,27 +20,31 @@ if (isset($_POST['upload'])){
     try{
         $lastId = Daltask::saveTask($title,$date,$workload,$listid);
 
-        if(isset($_FILES["file"])){
-            for($i = 0; $i < count($_FILES["file"]["name"]); $i++ ){
-                if($_FILES["file"]["error"][$i] == 0){
-                   $name = $_FILES["file"]["name"][$i];
-                   $temp_name = $_FILES["file"]["tmp_name"][$i];
-                   // UID != User ID
-                   // UID == unique ID
-
-                   // PNG file type =  "image/png"
-                   $uid = md5(rand(-5000,5000) + time()) . "." . explode("/",$_FILES["file"]["type"][$i])[1];
-                    //moves temp file to map files with unique name
-                   move_uploaded_file($temp_name, "files/$uid");
-                    //saves file to db
-                   Daltask::saveFile($lastId,$name,$uid);
-                }else{
-                    // File could not be uploaded
+        if($listid==-1){
+            $error = "can't go back to the future";
+        }else{
+            if(isset($_FILES["file"])){
+                for($i = 0; $i < count($_FILES["file"]["name"]); $i++ ){
+                    if($_FILES["file"]["error"][$i] == 0){
+                       $name = $_FILES["file"]["name"][$i];
+                       $temp_name = $_FILES["file"]["tmp_name"][$i];
+                       // UID != User ID
+                       // UID == unique ID
+    
+                       // PNG file type =  "image/png"
+                       $uid = md5(rand(-5000,5000) + time()) . "." . explode("/",$_FILES["file"]["type"][$i])[1];
+                        //moves temp file to map files with unique name
+                       move_uploaded_file($temp_name, "files/$uid");
+                        //saves file to db
+                       Daltask::saveFile($lastId,$name,$uid);
+                    }else{
+                        // File could not be uploaded
+                    }
                 }
+    
             }
-
+            header("location: list.php?listid={$listid}");
         }
-        header("location: list.php?listid={$listid}");
     }catch( Exception $e){
         $error = $e->getMessage();
     }
@@ -77,11 +81,11 @@ if (isset($_POST['upload'])){
 
         <div class="form-group">
             <label for="title">Title</label>
-            <textarea id="title" name="title" rows="1"></textarea>
+            <textarea id="title" name="title" rows="1" required></textarea>
         </div>
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" id="date" name="date" >
+            <input type="date" id="date" name="date" required>
         </div>
         <div class="form-group">
             <label for="workload">workload 1-20 (ongeveer)</label> 
